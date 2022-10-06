@@ -1,27 +1,51 @@
 ﻿const el = document.getElementById("iban")
 const number = 97
 
+function setCharAt(str, index, chr) {
+    if (index > str.length - 1) return str;
+    return str.substring(0, index) + chr + str.substring(index + 1);
+}
+
+function getToAdd(count) {
+    if (count == 1)
+        return 7
+    if (count == 2)
+        return 9
+    return 0
+}
+
 function increment() {
     let string = el.value
-    let asdf = string.replace("TR", "")
-    const len = asdf.length
+    let replaced = string.replace("TR", "")
+    const len = replaced.length
     let index = len - 1
     let count = 0
+    let elde = 0
 
-    while (count++ < 2) {
-        let el = asdf[index]
+    while (count++ < 2 || elde > 0) {
+        let el = replaced[index]
         let num = parseInt(el)
         if (isNaN(num)) {
-            console.log("format is not valid!!!")
+            console.log(num, "format is not valid!!!")
             return
-        } else {
-            console.log("dneme")
         }
-        console.log("num => ", num)
-        console.log(el)
+        const toAdd = getToAdd(count)
+        num += toAdd + elde
+        elde = 0
+        if (num > 9) {
+            elde++
+            num %= 10
+        }
+        replaced = setCharAt(replaced, index, num.toString())
+        /* console.log("replaced => ", replaced) */
+        /**/
+        /**/
+        /* console.log("num => ", num) */
+        /* console.log(el) */
         index--;
 
     }
+    el.value = "TR" + replaced
 
 }
 
