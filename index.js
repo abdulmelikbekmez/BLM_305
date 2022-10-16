@@ -1,5 +1,4 @@
 ﻿const el = document.getElementById("iban")
-const number = 97
 
 function setCharAt(str, index, chr) {
     if (index > str.length - 1) return str;
@@ -73,3 +72,5 @@ function verifyIBAN() {
     console.log(acc == 1)
     return acc == 1;
 }
+
+code.innerText = setCharAt + "\n" + getToAdd + "\n " + increment
