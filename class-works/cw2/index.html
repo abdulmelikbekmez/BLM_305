@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="../images/icon192.png">
+    <title>List of Objects </title>
+
+    <style>
+        body {
+            max-width: 500px;
+        }
+
+        #inp {
+            white-space: pre-wrap;
+        }
+
+        #sample {
+            overflow-x: auto;
+        }
+
+        #out {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 id=title></h2>
+    <div>
+        <b>Text input &emsp;
+            <input type=button id=convert value=Convert onclick="toList()">
+        </b>
+    </div>
+
+    <div>
+        <b>Map Example - get volume &emsp;
+
+            <input type="button" id=period value=period onclick="mapVolume()">
+
+        </b>
+    </div>
+    <div>
+        <b>Filter by mass &emsp;
+            <input type="number" id=filter value=filter onclick="filterMass()" onchange="filterMass()">
+        </b>
+    </div>
+
+    <p>
+        <textarea id=inp rows=10 cols=50 disabled></textarea>
+    </p>
+    <b>JSON output</b>
+    <pre id=out></pre>
+    <hr />
+    <b>Sample code</b>
+    <pre id=sample></pre>
+    <hr />
+    <p>Ref:
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters#Examples"
+            target="NewTab">Rest Parameters</a>
+    </p>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

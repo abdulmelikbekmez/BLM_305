@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>BLM_305 Lab 2</title>
+
+    <style>
+        /* CSS comment */
+        body {
+            max-width: 550px;
+        }
+
+
+        .out {
+            font-size: 18px;
+            background: green;
+            color: yellowgreen;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HTML comment: Modify all items marked xxx -->
+
+    <h2>TC Kimlik/IBAN Doğrula</h2>
+    IBAN
+    <input type=text value=0 id="iban">
+    <div>
+        <button onClick="verifyIBAN()">Doğrula</button>
+        <button type="button" onclick="increment()">⊕ </button>
+
+    </div>
+
+    <pre id="code"></pre>
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>

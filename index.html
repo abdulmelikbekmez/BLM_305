@@ -20,24 +20,63 @@
             text-align: center;
             padding: 10px;
         }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
     </style>
 </head>
 
 <body>
-    <!-- HTML comment: Modify all items marked xxx -->
+    <h1>BLM 305 -- Advanced Programming</h1>
+    <hr>
+    <h2>Class Works</h2>
+    <hr>
+    <table>
+        <tr>
+            <th>Class Work</th>
+            <th>link</th>
+        </tr>
+        <tr>
+            <td>CW1</td>
+            <td><a href="class-works/cw1/index.html">Iban Verification</a></td>
+        </tr>
+        <tr>
+            <td>CW2</td>
+            <td><a href="class-works/cw2/index.html">List of Objects</a></td>
+        </tr>
+    </table>
 
-    <h2>TC Kimlik/IBAN Doğrula</h2>
-    IBAN
-    <input type=text value=0 id="iban">
-    <div>
-        <button onClick="verifyIBAN()">Doğrula</button>
-        <button type="button" onclick="increment()">⊕ </button>
+    <hr>
+    <h2>Home Works</h2>
+    <hr>
+    <table>
+        <tr>
+            <th>Home Works</th>
+            <th>link</th>
+        </tr>
+        <tr>
+            <td>HW1</td>
+            <td><a href="home-works/hw1/index.html">Data Analysis</a></td>
+        </tr>
+    </table>
+    <hr>
+    <a href="https://github.com/abdulmelikbekmez/BLM_305">Github Repository Link</a>
+    <hr>
 
-    </div>
-
-    <pre id="code"></pre>
-
-    <script src="index.js"></script>
 
 </body>
 
