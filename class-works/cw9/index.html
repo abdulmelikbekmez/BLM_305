@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://maeyler.github.io/JS/sss/inspector.css" rel="stylesheet" media="all">
+    <script src="https://maeyler.github.io/JS/sss/inspector.js"></script>
+    <!-- <link rel="icon" href="../images/icon192.png"> -->
+    <title>Image Inspector </title>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        p {
+            margin: 1em;
+            font: 14px arial, sans-serif;
+        }
+
+        div {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #color {
+            background: #bbb;
+            text-align: center;
+            padding: 16px;
+            margin: 0;
+            margin-bottom: 10px;
+            min-width: 260px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <canvas id="canvas"></canvas>
+        <p id=color>{x,y} {R,G,B}</p>
+    </div>
+    <div>
+        <div id=sss></div>
+        <p>Use <code>loadImage(x)</code> where x is a URL or <br>
+            number n=1: villa, n=2: field, n=3: flower
+        <p>
+            Ref: <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas"
+                target=NewTab>Pixel manipulation</a>
+    </div>
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>
