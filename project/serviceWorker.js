@@ -1,3 +1,4 @@
+const CACHE = "JS"
 const staticAssets = [
     './',
     './style.css',
@@ -5,7 +6,7 @@ const staticAssets = [
 ];
 
 self.addEventListener('install', async event => {
-    const cache = await caches.open('static-meme');
+    const cache = await caches.open(CACHE);
     cache.addAll(staticAssets);
 });
 
@@ -25,7 +26,7 @@ async function cacheData(request) {
 }
 
 async function networkFirst(request) {
-    const cache = await caches.open("JS");
+    const cache = await caches.open(CACHE);
     try {
         const response = await fetch(request);
         cache.put(request, response.clone());
