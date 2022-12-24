@@ -12,7 +12,7 @@ export class Camera {
     private m_yaw: number
 
     constructor() {
-        this.m_position = new Vec3(0, 0, 5)
+        this.m_position = new Vec3(0, 50, 300)
         this.m_direction = new Vec3(0, 0, -1)
         this.m_up = new Vec3(0, 1, 0)
 
@@ -37,17 +37,28 @@ export class Camera {
         return this.m_up
     }
 
-    public degToRad(degree: number) {
+    private degToRad(degree: number) {
         return (degree * Math.PI) / 180
     }
 
     public subscribe() {
         window.addEventListener("mousemove", (e) => {
-            this.update(e.movementX, e.movementY)
+            this.onMouseMove(e.movementX, e.movementY)
         })
     }
 
-    private update(x: number, y: number) {
+
+    private rotate() {
+        let p = this.position
+        let angle = .1
+        let x = Math.cos(this.degToRad(angle)) * p.x - Math.sin(this.degToRad(angle)) * p.z
+        let z = Math.sin(this.degToRad(angle)) * p.x + Math.cos(this.degToRad(angle)) * p.z
+        p.x = x
+        p.z = z
+        this.m_direction = new Vec3(0, 0, 0).sub(this.position).normalize()
+    }
+
+    private onMouseMove(x: number, y: number) {
         this.m_yaw += x * SENSIVITY
         this.m_pitch -= y * SENSIVITY
 
@@ -59,7 +70,7 @@ export class Camera {
         this.m_direction.z = Math.sin(this.degToRad(this.m_yaw)) * Math.cos(this.degToRad(this.m_pitch))
     }
 
-    public updateKey(m: Map<string, boolean>) {
+    public update(m: Map<string, boolean>) {
 
         if (m.has("w") && m.get("w")) {
             this.position = this.position.add(this.direction.mul(SPEED))
@@ -76,5 +87,6 @@ export class Camera {
         if (m.has("d") && m.get("d")) {
             this.position = this.position.add(this.direction.cross(this.up).normalize().mul(SPEED))
         }
+        this.rotate()
     }
 }

@@ -36,7 +36,6 @@ export class Scene {
                         this.staticEntities.push(new Entity(pos))
                     } else {
                         this.dynamicEntities.push(new Entity(pos))
-
                     }
                 }
             }
@@ -48,6 +47,6 @@ export class Scene {
     }
 
     public update(m: Map<string, boolean>) {
-        this.m_camera.updateKey(m)
+        this.m_camera.update(m)
     }
 }

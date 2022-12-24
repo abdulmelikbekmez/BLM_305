@@ -8,7 +8,7 @@ export class Camera {
     m_pitch;
     m_yaw;
     constructor() {
-        this.m_position = new Vec3(0, 0, 5);
+        this.m_position = new Vec3(0, 50, 300);
         this.m_direction = new Vec3(0, 0, -1);
         this.m_up = new Vec3(0, 1, 0);
         this.m_pitch = 0;
@@ -31,10 +31,19 @@ export class Camera {
     }
     subscribe() {
         window.addEventListener("mousemove", (e) => {
-            this.update(e.movementX, e.movementY);
+            this.onMouseMove(e.movementX, e.movementY);
         });
     }
-    update(x, y) {
+    rotate() {
+        let p = this.position;
+        let angle = .1;
+        let x = Math.cos(this.degToRad(angle)) * p.x - Math.sin(this.degToRad(angle)) * p.z;
+        let z = Math.sin(this.degToRad(angle)) * p.x + Math.cos(this.degToRad(angle)) * p.z;
+        p.x = x;
+        p.z = z;
+        this.m_direction = new Vec3(0, 0, 0).sub(this.position).normalize();
+    }
+    onMouseMove(x, y) {
         this.m_yaw += x * SENSIVITY;
         this.m_pitch -= y * SENSIVITY;
         if (this.m_pitch > 89)
@@ -45,7 +54,7 @@ export class Camera {
         this.m_direction.y = Math.sin(this.degToRad(this.m_pitch));
         this.m_direction.z = Math.sin(this.degToRad(this.m_yaw)) * Math.cos(this.degToRad(this.m_pitch));
     }
-    updateKey(m) {
+    update(m) {
         if (m.has("w") && m.get("w")) {
             this.position = this.position.add(this.direction.mul(SPEED));
         }
@@ -58,5 +67,6 @@ export class Camera {
         if (m.has("d") && m.get("d")) {
             this.position = this.position.add(this.direction.cross(this.up).normalize().mul(SPEED));
         }
+        this.rotate();
     }
 }

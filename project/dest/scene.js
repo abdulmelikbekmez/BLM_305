@@ -38,6 +38,6 @@ export class Scene {
         return this.m_camera;
     }
     update(m) {
-        this.m_camera.updateKey(m);
+        this.m_camera.update(m);
     }
 }
