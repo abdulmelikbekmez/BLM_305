@@ -29,7 +29,7 @@ export class Camera {
     degToRad(degree) {
         return (degree * Math.PI) / 180;
     }
-    subscribe() {
+    subscribeMouseMove() {
         window.addEventListener("mousemove", (e) => {
             this.onMouseMove(e.movementX, e.movementY);
         });

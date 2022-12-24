@@ -41,7 +41,7 @@ export class Camera {
         return (degree * Math.PI) / 180
     }
 
-    public subscribe() {
+    public subscribeMouseMove() {
         window.addEventListener("mousemove", (e) => {
             this.onMouseMove(e.movementX, e.movementY)
         })

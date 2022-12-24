@@ -9,10 +9,8 @@ export class Scene {
 
     constructor() {
         this.m_camera = new Camera()
-        this.m_camera.subscribe()
-
+        /* this.m_camera.subscribeMouseMove() */
     }
-
 
     public get dynamicEntities() {
         return this.m_dynamicEntityList
