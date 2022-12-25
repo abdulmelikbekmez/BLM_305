@@ -1,11 +1,13 @@
 const CACHE = "JS"
 const staticAssets = [
     './',
+    "./index.html",
     './style.css',
+    "./dest/",
     './dest/app.js'
 ];
 
-self.addEventListener('install', async event => {
+self.addEventListener('install', async _ => {
     const cache = await caches.open(CACHE);
     cache.addAll(staticAssets);
 });
