@@ -4,37 +4,47 @@ const staticAssets = [
     "./index.html",
     './style.css',
     "./dest/",
-    './dest/app.js'
+    './dest/app.js',
+    './dest/camera.js',
+    './dest/entity.js',
+    './dest/indexBuffer.js',
+    './dest/scene.js',
+    './dest/transform.js',
+    './dest/vertexBuffer.js',
+    './dest/math/',
+    './dest/math/mat4.js',
+    './dest/math/vec3.js',
+    './dest/renderer/',
+    './dest/renderer/index.js',
+    './dest/renderer/indexBuffer.js',
+    './dest/renderer/mesh.js',
+    './dest/renderer/shader.js',
+    './dest/renderer/vertexArray.js',
+    './dest/renderer/vertexBuffer.js',
+
+    './images/',
+    './images/favicon.co',
 ];
-
-self.addEventListener('install', async _ => {
-    const cache = await caches.open(CACHE);
-    cache.addAll(staticAssets);
+// When the service worker is installing, open the cache and add the precache resources to it
+self.addEventListener('install', (event) => {
+    event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(staticAssets)).catch(console.log));
 });
 
-self.addEventListener('fetch', event => {
-    const { request } = event;
-    const url = new URL(request.url);
-    if (url.origin === location.origin) {
-        event.respondWith(cacheData(request));
-    } else {
-        event.respondWith(networkFirst(request));
-    }
-});
+self.addEventListener("fetch", fetchCB);
 
-async function cacheData(request) {
-    const cachedResponse = await caches.match(request);
-    return cachedResponse || fetch(request);
+function save(req, resp) {
+    return caches.open(CACHE)
+        .then(cache => {
+            cache.put(req, resp.clone());
+            return resp;
+        })
+        .catch(console.log)
 }
 
-async function networkFirst(request) {
-    const cache = await caches.open(CACHE);
-    try {
-        const response = await fetch(request);
-        cache.put(request, response.clone());
-        return response;
-    } catch (error) {
-        return await cache.match(request);
-
-    }
+function fetchCB(e) { //fetch first
+    let req = e.request
+    e.respondWith(
+        fetch(req).then(r2 => save(req, r2))
+            .catch(() => { return caches.match(req).then(r1 => r1) })
+    )
 }

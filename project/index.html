@@ -26,11 +26,11 @@
                 try {
                     navigator.serviceWorker.register('serviceWorker.js');
                     console.log('SW registered');
-
                 } catch (error) {
                     console.log('SW failed');
-
                 }
+            } else {
+                console.log("serviceWorker is not available...")
             }
         })
     </script>
