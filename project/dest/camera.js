@@ -67,7 +67,8 @@ export class Camera {
             let tmp = e.changedTouches[0];
             let current = new Vec3(tmp.clientX, tmp.clientY, 0);
             let dif = current.sub(last);
-            this.position = this.position.add(this.direction.mul(SPEED * -dif.y));
+            this.position = this.position.add(this.direction.mul(SPEED * -dif.y * .4));
+            this.position = this.position.add(this.direction.cross(this.up).normalize().mul(SPEED * -dif.x * .4));
             last = current;
         });
     }
