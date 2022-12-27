@@ -70,6 +70,27 @@ export class Camera {
         this.m_direction.z = Math.sin(this.degToRad(this.m_yaw)) * Math.cos(this.degToRad(this.m_pitch))
     }
 
+    public subscribeTouchMove() {
+        let last: Vec3 | null = null
+
+        window.addEventListener("touchstart", e => {
+            let tmp = e.changedTouches[0]
+            last = new Vec3(tmp.clientX, tmp.clientY, 0)
+        })
+
+        window.addEventListener("touchend", _ => {
+            last = null
+        })
+        window.addEventListener("touchmove", e => {
+            let tmp = e.changedTouches[0]
+            let current = new Vec3(tmp.clientX, tmp.clientY, 0)
+            let dif = current.sub(last)
+            this.position = this.position.add(this.direction.mul(SPEED * -dif.y))
+            last = current
+        })
+
+    }
+
     public update(m: Map<string, boolean>) {
 
         if (m.has("w") && m.get("w")) {

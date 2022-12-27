@@ -9,6 +9,7 @@ export class Scene {
 
     constructor() {
         this.m_camera = new Camera()
+        this.m_camera.subscribeTouchMove()
         /* this.m_camera.subscribeMouseMove() */
     }
 
