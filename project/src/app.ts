@@ -3,6 +3,7 @@ import { Renderer } from "./renderer/index.js";
 import { Scene } from "./scene.js";
 
 
+
 let keyState = new Map<string, boolean>();
 
 window.addEventListener("keydown", (e) => {
@@ -13,14 +14,22 @@ window.addEventListener("keyup", (e) => {
     keyState.set(e.key, false)
 })
 
-
 const FPS = 60
 export const canvas = document.getElementById("canvas") as HTMLCanvasElement
 
 export const gl = canvas.getContext("webgl2")
+function setCanvasWidth() {
+    canvas.width = window.outerWidth;
+    canvas.height = window.outerHeight * 0.7;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+}
 
-canvas.width = window.innerWidth * 0.9
-canvas.height = window.innerHeight * 0.9
+
+window.addEventListener("resize", (_) => {
+    setCanvasWidth()
+})
+canvas.width = window.outerWidth;
+canvas.height = window.outerHeight * 0.7;
 
 
 class App {
@@ -30,13 +39,13 @@ class App {
     constructor() {
 
         gl.enable(gl.DEPTH_TEST)
-        gl.clearColor(0.2, 0.5, 0.6, 1)
-        gl.viewport(0, 0, canvas.width, canvas.height)
+        gl.clearColor(0.14, 0.1, 0.1, 1);
+        setCanvasWidth()
 
         this.m_renderer = new Renderer()
 
         this.m_scene = new Scene()
-        this.m_scene.addEntites(20, true)
+        this.m_scene.addEntites(30, true)
 
     }
 

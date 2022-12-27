@@ -1,27 +1,6 @@
 import { Vec3 } from "./math/vec3.js";
 import { Renderer } from "./renderer/index.js";
 import { Scene } from "./scene.js";
-
-
-const FPS = 60;
-
-export const canvas = document.getElementById("canvas");
-export const gl = canvas.getContext("webgl2");
-
-function setCanvasWidth() {
-    canvas.width = window.outerWidth;
-    canvas.height = window.outerHeight * 0.7;
-    gl.viewport(0, 0, canvas.width, canvas.height);
-}
-
-
-window.addEventListener("resize", (_) => {
-    setCanvasWidth()
-})
-canvas.width = window.outerWidth;
-canvas.height = window.outerHeight * 0.7;
-
-
 let keyState = new Map();
 window.addEventListener("keydown", (e) => {
     keyState.set(e.key, true);
@@ -29,16 +8,29 @@ window.addEventListener("keydown", (e) => {
 window.addEventListener("keyup", (e) => {
     keyState.set(e.key, false);
 });
+const FPS = 60;
+export const canvas = document.getElementById("canvas");
+export const gl = canvas.getContext("webgl2");
+function setCanvasWidth() {
+    canvas.width = window.outerWidth;
+    canvas.height = window.outerHeight * 0.7;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+}
+window.addEventListener("resize", (_) => {
+    setCanvasWidth();
+});
+canvas.width = window.outerWidth;
+canvas.height = window.outerHeight * 0.7;
 class App {
     m_renderer;
     m_scene;
     constructor() {
         gl.enable(gl.DEPTH_TEST);
         gl.clearColor(0.14, 0.1, 0.1, 1);
-        setCanvasWidth()
+        setCanvasWidth();
         this.m_renderer = new Renderer();
         this.m_scene = new Scene();
-        this.m_scene.addEntites(20, true);
+        this.m_scene.addEntites(30, true);
     }
     update() {
         this.m_scene.update(keyState);
