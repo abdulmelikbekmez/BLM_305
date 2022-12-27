@@ -12,8 +12,8 @@ const FPS = 60;
 export const canvas = document.getElementById("canvas");
 export const gl = canvas.getContext("webgl2");
 function setCanvasWidth() {
-    canvas.width = window.outerWidth;
-    canvas.height = window.outerHeight * 0.7;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     gl.viewport(0, 0, canvas.width, canvas.height);
 }
 window.addEventListener("resize", (_) => {
